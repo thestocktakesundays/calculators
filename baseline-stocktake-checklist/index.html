@@ -1,0 +1,807 @@
+<title>Baseline Stocktake Checklist</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+/* Layout: one phone-first column on a soft wine gradient. Header with logo and theme switch,
+   three tabbed glass cards for the inputs, glass result tiles (hero tile raised), then a talk-it-through
+   tile and one primary button. Follows the Stocktake Sundays brand and UI style guide.
+   Default theme is Burgundy Emboss; Matte Blush is the alternative, switched on the page. */
+:root{
+  --wine-900:#2E0715; --wine-800:#3E0C1F; --wine-700:#55112B; --claret:#8A2346; --rose:#C9788D;
+  --rosewater:#E7B2BF; --blush:#F1CBD3; --apricot:#E9BFA6; --sand:#EBD9C8; --cream:#FAF0E8; --ink:#3A0D1E; --mute:#6B3A4A;
+
+  /* Burgundy Emboss (default) */
+  --ground-base:#3E0C1F;
+  --ground:
+    radial-gradient(620px 520px at 0% 0%, rgba(201,120,141,.42), transparent 70%),
+    radial-gradient(620px 520px at 100% 0%, rgba(233,191,166,.30), transparent 70%),
+    radial-gradient(900px 640px at 50% 100%, rgba(138,35,70,.72), transparent 72%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.028) 0 1px, transparent 1px 16px);
+  --text:#FAF0E8; --soft:rgba(250,240,232,.78); --accent:#E7B2BF; --icon:#E7B2BF; --focus:#E7B2BF;
+  --tile-bg:linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.04));
+  --tile-border:rgba(255,255,255,.20);
+  --tile-shadow:inset 0 1px 0 rgba(255,255,255,.26), 0 18px 38px -14px rgba(0,0,0,.6);
+  --raised-shadow:inset 0 1px 0 rgba(255,255,255,.32), 0 28px 54px -16px rgba(0,0,0,.72);
+  --field-bg:rgba(255,255,255,.08); --field-border:rgba(255,255,255,.26); --field-ink:#FAF0E8;
+  --flat:rgba(255,255,255,.07); --line:rgba(255,255,255,.16);
+  --p-bg:linear-gradient(180deg,#F6D6DD,#E7B2BF); --p-ink:#3E0C1F; --p-border:rgba(62,12,31,.55); --p-hi:rgba(255,255,255,.75);
+  --sage:#A8E3C0; --amber:#F2CF8E; --over:#FFB3BC;
+  --tab-bg:#55112B; --tab-ink:#FAF0E8;
+  --bar-fill:#E7B2BF; --bar-track:rgba(255,255,255,.14);
+  --lineA:#E7B2BF; --lineB:#C9788D;
+  --logo:#FAF0E8; --logo-dot:#E7B2BF;
+  color-scheme:dark;
+}
+/* Matte Blush */
+:root[data-theme="light"]{
+  --ground-base:#F1CBD3;
+  --ground:
+    radial-gradient(620px 520px at 0% 0%, rgba(231,178,191,.85), transparent 70%),
+    radial-gradient(620px 520px at 100% 0%, rgba(233,191,166,.75), transparent 70%),
+    radial-gradient(900px 640px at 50% 100%, rgba(250,240,232,.9), transparent 72%),
+    repeating-linear-gradient(90deg, rgba(85,17,43,.03) 0 1px, transparent 1px 16px);
+  --text:#3A0D1E; --soft:#6B3A4A; --accent:#8A2346; --icon:#55112B; --focus:#8A2346;
+  --tile-bg:linear-gradient(145deg, rgba(255,255,255,.58), rgba(255,255,255,.22));
+  --tile-border:rgba(255,255,255,.6);
+  --tile-shadow:inset 0 1px 0 rgba(255,255,255,.75), 0 16px 34px -14px rgba(62,12,31,.38);
+  --raised-shadow:inset 0 1px 0 rgba(255,255,255,.85), 0 26px 50px -16px rgba(62,12,31,.5);
+  --field-bg:rgba(255,255,255,.55); --field-border:rgba(85,17,43,.30); --field-ink:#3A0D1E;
+  --flat:rgba(255,255,255,.5); --line:rgba(85,17,43,.16);
+  --p-bg:linear-gradient(180deg,#7C2042,#55112B); --p-ink:#FAF0E8; --p-border:#3E0C1F; --p-hi:rgba(255,255,255,.28);
+  --sage:#2F6B4C; --amber:#8A5A0B; --over:#A32838;
+  --tab-bg:#55112B; --tab-ink:#FAF0E8;
+  --bar-fill:#55112B; --bar-track:rgba(85,17,43,.14);
+  --lineA:#55112B; --lineB:#8A2346;
+  --logo:#3E0C1F; --logo-dot:#3E0C1F;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--ground-base);background-image:var(--ground);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:26px;-webkit-text-size-adjust:100%;min-height:100vh}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,.figure{font-family:'Fraunces',Georgia,serif}
+h1,h2{margin:0;font-weight:500;text-transform:lowercase;text-wrap:balance}
+h1 em,h2 em{font-style:italic;font-weight:500;color:var(--accent)}
+h1{font-size:32px;line-height:36px}
+h2{font-size:24px;line-height:30px}
+@media (min-width:640px){h1{font-size:40px;line-height:44px}h2{font-size:28px;line-height:34px}}
+p{margin:0 0 10px;max-width:70ch}
+.eyebrow{margin:22px 0 8px;font:600 11.5px/16px 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.caption{font-size:12.5px;line-height:18px;color:var(--soft)}
+.small{font-size:14px;line-height:22px}
+.script{font-family:'Caveat',cursive;font-weight:500;font-size:26px;line-height:30px;margin:6px 0 12px;color:var(--accent)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* icons: one sprite, stroke 1.8, round caps, colour follows the theme */
+.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:var(--icon)}
+.ic.sm{width:20px;height:20px}
+
+/* logo: below 24px it is flat */
+.toprow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:18px}
+.logo{font:600 20px/24px 'Fraunces',Georgia,serif;letter-spacing:-.02em;color:var(--logo)}
+.logo i{font-style:normal;color:var(--logo-dot)}
+
+/* glass */
+.tile{background:var(--tile-bg);border:1px solid var(--tile-border);box-shadow:var(--tile-shadow);border-radius:24px;padding:20px 18px;-webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);margin:0;min-width:0}
+.tile.raised{border-radius:28px;box-shadow:var(--raised-shadow)}
+.tile + .tile,.tile + .tabbed,.tabbed + .tabbed{margin-top:16px}
+fieldset.tile{display:block}
+.th{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.th h2{flex:1;min-width:0}
+.tabbed{position:relative;margin-top:36px}
+.tab{position:absolute;top:-26px;left:20px;height:26px;display:flex;align-items:center;padding:0 14px;border-radius:12px 12px 0 0;background:var(--tab-bg);color:var(--tab-ink);border:1px solid var(--tile-border);border-bottom:0;font:600 11.5px/1 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase}
+
+/* fields */
+.field{display:grid;gap:6px;margin:0 0 16px}
+.lbl{font-weight:600;font-size:15px;line-height:22px}
+.hint{font-size:12.5px;line-height:18px;color:var(--soft)}
+.money{position:relative}
+.money b{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-weight:500;color:var(--soft);pointer-events:none}
+input[type=text]{width:100%;height:48px;border:1px solid var(--field-border);border-radius:16px;background:var(--field-bg);color:var(--field-ink);font:400 16px 'DM Sans',sans-serif;padding:0 16px;box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}
+.money input{padding-left:32px}
+.money.changed b{color:var(--mute)}
+input[type=text].changed{background:#fff;border-color:var(--rose);color:var(--ink)}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:380px){.pair{grid-template-columns:minmax(0,1fr)}}
+.sep{border:0;border-top:1px solid var(--line);margin:6px 0 18px}
+
+/* segmented control */
+.seg{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--field-bg);border:1px solid var(--field-border)}
+.seg label{position:relative;flex:1;min-width:0;display:block}
+.seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.seg span{display:flex;align-items:center;justify-content:center;min-height:44px;padding:0 8px;border-radius:999px;font:600 14.5px/1 'DM Sans',sans-serif;letter-spacing:.02em;text-align:center}
+.seg input:checked + span{background:var(--p-bg);color:var(--p-ink);box-shadow:inset 0 1px 0 var(--p-hi)}
+.seg input:focus-visible + span{outline:3px solid var(--focus);outline-offset:2px}
+/* theme switch: 52x30 glass track, a burgundy flower and a blush flower, glossy ring over the chosen one */
+.themesw{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:60px;min-height:44px;cursor:pointer}
+.themesw input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.trk{pointer-events:none;position:relative;display:block;width:52px;height:30px;border-radius:999px;background:var(--field-bg);border:1px solid var(--field-border);box-shadow:inset 0 1px 2px rgba(0,0,0,.14)}
+.swatch{position:absolute;top:3px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center}
+.swatch .ic{width:16px;height:16px;stroke-width:1.8}
+.swatch.wine{left:3px;background:linear-gradient(180deg,#7C2042,#55112B);box-shadow:inset 0 1px 0 rgba(255,255,255,.28)}
+.swatch.wine .ic{color:#FAF0E8}
+.swatch.blush{right:3px;background:linear-gradient(180deg,#FAF0E8,#F1CBD3);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 0 0 1px rgba(85,17,43,.22)}
+.swatch.blush .ic{color:#55112B}
+.knob{position:absolute;top:1px;left:1px;width:26px;height:26px;border-radius:50%;border:2px solid var(--text);box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.themesw input:checked ~ .trk .knob{transform:translateX(22px)}
+.themesw input:focus-visible ~ .trk{outline:3px solid var(--focus);outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){.knob{transition:transform .2s ease}}
+
+/* chips: colour plus a word */
+.chip{display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;font:600 12.5px/1 'DM Sans',sans-serif;border:1px solid currentColor;background:color-mix(in srgb,currentColor 14%,transparent);white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.chip.ok{color:var(--sage)} .chip.warn{color:var(--amber)} .chip.over{color:var(--over)}
+.chip.review{color:var(--text);background:var(--blush);color:#3A0D1E;border-color:var(--blush)}
+.chip.suggest{color:var(--text);border-style:dashed;background:transparent}
+
+/* result */
+.vh{margin:0 0 2px;font:500 20px/26px 'Fraunces',Georgia,serif}
+.figure{margin:8px 0 2px;font-weight:600;font-size:48px;line-height:48px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+@media (max-width:360px){.figure{font-size:42px;line-height:44px}}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.stat{position:relative;background:var(--flat);border-radius:16px;padding:10px 12px 12px;min-width:0}
+.sc{margin:0;padding-right:34px;font-size:12.5px;line-height:18px;color:var(--soft);min-height:36px}
+.sv{margin:4px 0 0;font:600 22px/28px 'DM Sans',sans-serif;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ib{position:absolute;top:0;right:0;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--icon);cursor:pointer;padding:0}
+.th .ib{position:static;flex:none;background:var(--flat)}
+.ib[aria-expanded="true"]{background:var(--flat)}
+.expl{margin-top:14px;padding:12px 14px;border-radius:16px;background:var(--flat);font-size:14px;line-height:22px}
+.expl b{display:block;margin-bottom:2px}
+.expl[hidden]{display:none}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.brow{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.brow b{font-weight:600}
+.bar{height:10px;border-radius:999px;background:var(--bar-track);overflow:hidden;margin:6px 0 4px}
+.bar span{display:block;height:100%;border-radius:999px;background:var(--bar-fill)}
+.tablewrap{overflow-x:auto;border-radius:16px;background:var(--flat)}
+table{border-collapse:collapse;width:100%;min-width:300px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;font-size:14px;line-height:22px;border-bottom:1px solid var(--line);text-align:right}
+th{font-weight:600;color:var(--soft);font-size:12.5px}
+th:first-child,td:first-child{text-align:left}
+tr:last-child td{border-bottom:0}
+tr.cur td{background:rgba(201,120,141,.28)}[data-theme="light"] tr.cur td{background:rgba(138,35,70,.12)}tr.cur td:first-child{border-radius:12px 0 0 12px}tr.cur td:last-child{border-radius:0 12px 12px 0}.sro{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.dt{min-width:0}.dt th,.dt td{padding:10px 8px;font-size:13px;line-height:18px;vertical-align:top}.dt th{font-weight:600;opacity:.85}.dt .yrs{display:block;font-size:11px;font-weight:500;opacity:.75}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:380px){.two{grid-template-columns:minmax(0,1fr)}}
+.house .stat{display:grid;gap:8px;justify-items:start}
+.notes,.qs{margin:0;padding-left:20px;display:grid;gap:10px}
+.notes li::marker,.qs li::marker{color:var(--accent)}
+
+/* buttons */
+.actions{margin-top:20px;display:grid;gap:12px;justify-items:start}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid var(--tile-border);cursor:pointer;font:600 14.5px/1 'DM Sans',sans-serif;letter-spacing:.02em;color:var(--text);background:var(--tile-bg);box-shadow:var(--tile-shadow);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{min-height:52px;padding:0 28px;color:var(--p-ink);background:var(--p-bg);border-color:var(--p-border);box-shadow:inset 0 1px 0 var(--p-hi),0 10px 22px -10px rgba(0,0,0,.6)}
+.btn.danger{color:var(--over);border-color:var(--over)}
+.btn:disabled{opacity:.45;cursor:not-allowed;filter:none;transform:none}
+.btn .ic{color:currentColor}
+.confirm{padding:14px;border-radius:20px;background:var(--flat);display:grid;gap:12px;max-width:100%}
+.confirm[hidden]{display:none}
+.confirm .row{display:flex;flex-wrap:wrap;gap:10px}
+.foot{margin:28px 0 0;padding-bottom:36px;font-size:12.5px;line-height:18px;color:var(--soft)}
+/* retirement chart */
+.chartbox{position:relative;margin:12px 0 4px}
+.rchart{display:block;width:100%;height:auto;touch-action:pan-y;overflow:visible}
+.rchart text{font:500 11.5px 'DM Sans',sans-serif;fill:var(--soft)}
+.rchart .vlab{font-weight:600;fill:var(--text)}
+.rchart .gl{stroke:var(--line);stroke-width:1}
+.rchart .band{fill:var(--flat)}
+.la{stroke:var(--lineA);fill:none;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.lb{stroke:var(--lineB);fill:none;stroke-width:2;stroke-dasharray:6 4;stroke-linejoin:round}
+.rchart .da{fill:var(--lineA);stroke:var(--ground-base);stroke-width:2}
+.rchart .db{fill:var(--lineB);stroke:var(--ground-base);stroke-width:2}
+.rchart .cx{stroke:var(--soft);stroke-width:1}
+.rchart .off{display:none}
+.legend{display:flex;flex-wrap:wrap;gap:4px 18px;margin:12px 0 0;font-size:13px;line-height:20px}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend svg{width:28px;height:8px;overflow:visible}
+.rtip{position:absolute;top:0;pointer-events:none;transform:translateX(-50%);padding:8px 10px;border-radius:12px;font-size:12.5px;line-height:18px;background:color-mix(in srgb,var(--ground-base) 94%,transparent);border:1px solid var(--tile-border);box-shadow:var(--tile-shadow);white-space:nowrap;z-index:2}
+.rtip[hidden]{display:none}
+.tv{margin-top:8px}
+.tv summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600;font-size:14.5px;color:var(--accent)}
+.tv .tablewrap{margin-top:4px}
+.stat.wide{grid-column:1/-1}
+.stat.wide .figure{margin:4px 0 2px}
+/* phone-only bar: keeps the headline figure in view while filling in the form (sheet, level 3) */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--ground-base) 86%,transparent);-webkit-backdrop-filter:blur(20px) saturate(1.2);backdrop-filter:blur(20px) saturate(1.2);border-top:1px solid var(--tile-border);border-radius:28px 28px 0 0;box-shadow:var(--raised-shadow)}
+.sticky[hidden]{display:none}
+.stickybtn{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:0 4px;border:0;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer;border-radius:16px}
+.stickybtn .sv{margin:0;flex:none}
+.stickybtn .caption{margin:0;margin-left:auto;text-align:right}
+body.has-sticky{padding-bottom:84px}
+@media (min-width:641px){.sticky{display:none!important}body.has-sticky{padding-bottom:0}}
+@media (prefers-reduced-motion:no-preference){.btn,.ib{transition:filter .15s ease,transform .1s ease}}
+
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-income" viewBox="0 0 24 24"><path d="M6.2 8 L15.8 5.4 Q16.8 5.2 17.1 6.2 L18.8 12.6 Q19 13.6 18 13.9 L8.4 16.5 Q7.4 16.7 7.1 15.7 L5.4 9.3 Q5.2 8.3 6.2 8 Z"/><path d="M9 18.6 L17 20.8 Q18 21 18.3 20 L19.2 16.8"/><circle cx="12.3" cy="11" r="1.7"/></symbol>
+  <symbol id="i-basket" viewBox="0 0 24 24"><path d="M3.8 10 H20.2 L18.6 18.6 Q18.4 19.6 17.4 19.6 H6.6 Q5.6 19.6 5.4 18.6 Z"/><path d="M8 10 L10.5 4.8"/><path d="M16 10 L13.5 4.8"/><path d="M9.5 13.5 V16.5"/><path d="M12 13.5 V16.5"/><path d="M14.5 13.5 V16.5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.6 11.3 L12 4.1 L20.4 11.4"/><path d="M5.6 10 V19.5 Q5.6 20.4 6.5 20.4 H17.5 Q18.4 20.4 18.4 19.5 V10.1"/><path d="M10 20.4 V15.4 Q10 14.4 11 14.4 H13 Q14 14.4 14 15.4 V20.4"/></symbol>
+  <symbol id="i-budget" viewBox="0 0 24 24"><path d="M10.6 4.2 A8.4 8.4 0 1 0 19.8 13.4 H10.6 Z"/><path d="M13.4 2.9 A8 8 0 0 1 21.1 10.6 H13.4 Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="3"/><path d="M4 10 H20"/><path d="M8.5 3.8 V7"/><path d="M15.5 3.8 V7"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 3.4 C16.9 3.2 20.8 7 20.6 12 C20.4 16.9 16.7 20.7 11.8 20.6 C7 20.5 3.3 16.8 3.4 12 C3.5 7.3 7.2 3.5 12 3.4 Z"/><path d="M12 11 V16.2"/><path d="M12 7.9 V8"/></symbol>
+  <symbol id="i-bin" viewBox="0 0 24 24"><path d="M5 7 H19"/><path d="M9.5 7 V5 Q9.5 4 10.5 4 H13.5 Q14.5 4 14.5 5 V7"/><path d="M6.8 7 L7.6 19 Q7.7 20 8.7 20 H15.3 Q16.3 20 16.4 19 L17.2 7"/><path d="M10.2 10.5 V16"/><path d="M13.8 10.5 V16"/></symbol>
+  <symbol id="i-todo" viewBox="0 0 24 24"><path d="M4.6 6.8 L6 8.2 L8.6 5.4"/><path d="M4.6 12.6 L6 14 L8.6 11.2"/><path d="M4.6 18.4 L6 19.8 L8.6 17"/><path d="M12 6.8 H20"/><path d="M12 12.6 H20"/><path d="M12 18.4 H20"/></symbol>
+  <symbol id="i-flower" viewBox="0 0 24 24"><path d="M12 9.4 C10.2 6.4 10.6 3.8 12 3.4 C13.4 3.8 13.8 6.4 12 9.4 Z"/><path transform="rotate(72 12 12)" d="M12 9.4 C10.2 6.4 10.6 3.8 12 3.4 C13.4 3.8 13.8 6.4 12 9.4 Z"/><path transform="rotate(144 12 12)" d="M12 9.4 C10.2 6.4 10.6 3.8 12 3.4 C13.4 3.8 13.8 6.4 12 9.4 Z"/><path transform="rotate(216 12 12)" d="M12 9.4 C10.2 6.4 10.6 3.8 12 3.4 C13.4 3.8 13.8 6.4 12 9.4 Z"/><path transform="rotate(288 12 12)" d="M12 9.4 C10.2 6.4 10.6 3.8 12 3.4 C13.4 3.8 13.8 6.4 12 9.4 Z"/><circle cx="12" cy="12" r="1.5"/></symbol>
+  <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 20.5 V11.5"/><path d="M12 12 Q12 7 6.5 6.5 Q6.5 11.5 12 12"/><path d="M12 14 Q12 9.5 17.5 9 Q17.5 14 12 14"/><path d="M8.5 20.5 H15.5"/></symbol>
+  <symbol id="i-jar" viewBox="0 0 24 24"><path d="M7 3.6 H17"/><path d="M8 5.2 Q6 6.6 6 9.2 V18 Q6 20.2 8.2 20.2 H15.8 Q18 20.2 18 18 V9.2 Q18 6.6 16 5.2"/><circle cx="12" cy="13.6" r="2.4"/></symbol>
+</svg>
+<style>
+.wt{list-style:none;margin:0;padding:0}
+.wt li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.wt li span{min-width:0}.wt li b{font-weight:600;white-space:nowrap}
+.wt li.tot{border-bottom:0;background:var(--flat);border-radius:12px;padding:10px 12px;margin:6px 0}
+.wt li.sub span{color:var(--soft);font-size:13.5px}
+.dt .dbtn{all:unset;box-sizing:border-box;cursor:pointer;min-height:44px;min-width:44px;display:flex;align-items:center;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.dt .dbtn:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px}
+.dt td{vertical-align:middle}
+.dt .best{display:block;font-size:11px;font-weight:600;color:var(--accent)}
+.dt td.l{text-align:left}
+.est{color:var(--soft);font-size:12px}
+.cond[hidden]{display:none}
+</style>
+<style>
+.prog{margin:22px 0 0;font:600 14px/20px 'DM Sans',sans-serif}
+.meter{height:10px;border-radius:999px;background:var(--bar-track);overflow:hidden;margin-top:8px}
+.meter span{display:block;height:100%;width:0;border-radius:999px;background:var(--bar-fill)}
+@media (prefers-reduced-motion:no-preference){.meter span{transition:width .25s ease}}
+.stepcard h2{font-size:22px;line-height:28px}
+.stepcard .tip,.stepcard .example{margin:10px 0;padding:10px 14px;border-radius:16px;background:var(--flat);font-size:14px;line-height:22px}
+.stepcard .example{border:1px dashed var(--line)}
+.tick{display:flex;align-items:center;gap:12px;min-height:44px;margin-top:6px;font-weight:600;cursor:pointer}
+.tick input{width:24px;height:24px;margin:0;accent-color:var(--bar-fill);flex:none}
+.stepcard.done{opacity:.82}
+select{width:100%;height:48px;border:1px solid var(--field-border);border-radius:16px;background:var(--field-bg);color:var(--field-ink);font:400 16px 'DM Sans',sans-serif;padding:0 16px}
+select:disabled{opacity:.5}
+select option{color:#3A0D1E}
+.copybox{width:100%;margin-top:10px;min-height:150px;border-radius:16px;border:1px solid var(--field-border);background:var(--field-bg);color:var(--field-ink);font:400 14px/20px 'DM Sans',sans-serif;padding:12px}
+.lock{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.lock li{display:flex;gap:12px;align-items:flex-start}
+.lock .ic{margin-top:2px}
+.wait{margin-top:14px;display:grid;gap:10px;justify-items:start}
+</style>
+
+<header class="wrap">
+  <div class="toprow">
+    <span class="logo">stocktake sundays<i>.</i></span>
+    <label class="themesw" title="Switch colour theme">
+      <input type="checkbox" role="switch" id="themeSwitch" aria-label="Blush colour theme">
+      <span class="trk" aria-hidden="true">
+        <span class="swatch wine"><svg class="ic"><use href="#i-flower"/></svg></span>
+        <span class="swatch blush"><svg class="ic"><use href="#i-flower"/></svg></span>
+        <span class="knob"></span>
+      </span>
+    </label>
+  </div>
+  <p class="eyebrow">The baseline stocktake · step one of every budget</p>
+  <h1>know where you <em>stand</em> before you budget</h1>
+  <p style="margin-top:12px">Eight small steps and one calculator. You'll finish with your monthly position: a surplus, a shortfall, or somewhere in between, plus how long your savings would last. It takes about 20 minutes with your bank statements to hand.</p>
+  <p class="script">grab a drink, get comfy, she's got a bit to her</p>
+  <p class="caption">Your numbers never leave your phone. They're saved on this device only, and you can clear them at the bottom.</p>
+  <div class="prog"><span id="progText">0 of 8 steps ticked</span><div class="meter" aria-hidden="true"><span id="progBar"></span></div></div>
+</header>
+
+<main class="wrap">
+  <ol class="steps" id="steps" style="list-style:none;margin:0;padding:0">
+
+    <li class="tabbed stepcard" data-step="1">
+      <span class="tab">Step 1</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg><h2>choose how far <em>back</em> to look</h2></div>
+        <p>Twelve months is best. It catches once-a-year bills, Christmas and the quiet months. Three months is a solid start, and one month is still worth doing. If you only have a month or two, the calculator has a spot for your yearly bills.</p>
+        <p class="tip">Use complete months only. Start with the last full month and count back.</p>
+        <label class="tick"><input type="checkbox" data-step="1"> Done</label>
+      </div>
+    </li>
+
+    <li class="tabbed stepcard" data-step="2">
+      <span class="tab">Step 2</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-basket"/></svg><h2>gather your <em>transactions</em></h2></div>
+        <p>Pull the transactions for your window from every account: everyday, credit cards, buy now pay later, loans and savings. Most banks let you export a CSV or spreadsheet. If yours doesn't, the monthly summary in your app works too. Don't forget cash.</p>
+        <p class="tip">Don't judge anything yet. This step is only collecting.</p>
+        <label class="tick"><input type="checkbox" data-step="2"> Done</label>
+      </div>
+    </li>
+
+    <li class="tabbed stepcard" data-step="3">
+      <span class="tab">Step 3</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-income"/></svg><h2>add up what came <em>in</em></h2></div>
+        <p>Total all the money that landed in your accounts over the window, after tax: wages, side income, government payments, rent you receive. Leave out transfers between your own accounts. Take refunds off the spending they relate to instead of counting them as income.</p>
+        <label class="tick"><input type="checkbox" data-step="3"> Done</label>
+      </div>
+    </li>
+
+    <li class="tabbed stepcard" data-step="4">
+      <span class="tab">Step 4</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-budget"/></svg><h2>add up what you spent on <em>living</em></h2></div>
+        <p>Total everything you spent: rent, bills, groceries, transport, eating out, subscriptions, kids, pets, the lot. Leave out two things so nothing is counted twice: money you moved into savings, and payments toward debt. Those are next.</p>
+        <p class="tip">Then work out how much of it was fixed: the bills that are the same every month, like rent, power, insurance, childcare and phone. The calculator uses it to show what's left to live on once the fixed stuff is paid.</p>
+        <label class="tick"><input type="checkbox" data-step="4"> Done</label>
+      </div>
+    </li>
+
+    <li class="tabbed stepcard" data-step="5">
+      <span class="tab">Step 5</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-jar"/></svg><h2>total your savings and <em>debt</em> payments</h2></div>
+        <p>Two more totals for the window. First, money you moved into savings or investments. Second, money you paid toward debt: credit cards, loans, buy now pay later, student loans and mortgage payments. Rent counts as spending in step 4, but mortgage payments belong here.</p>
+        <label class="tick"><input type="checkbox" data-step="5"> Done</label>
+      </div>
+    </li>
+
+    <li class="tabbed stepcard" data-step="6">
+      <span class="tab">Step 6</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-todo"/></svg><h2>find your monthly <em>averages</em></h2></div>
+        <p>Divide each total by the number of months in your window. Three months of data: total ÷ 3. Twelve months: total ÷ 12.</p>
+        <p class="example"><b>Example:</b> $9,600 of income over 3 months is $9,600 ÷ 3 = $3,200 a month. $26,400 of spending over 12 months is $26,400 ÷ 12 = $2,200 a month.</p>
+        <p>The calculator below does the dividing for you, so you can enter your totals as they are.</p>
+        <p class="tip">If one month had a big one-off, like a car repair or a holiday, you can leave it out or keep it in. Keep it in for a more cautious picture. Pick one and stay consistent.</p>
+        <label class="tick"><input type="checkbox" data-step="6"> Done</label>
+      </div>
+    </li>
+
+    <li class="tabbed stepcard" data-step="7">
+      <span class="tab">Step 7</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-sprout"/></svg><h2>check today's <em>balances</em></h2></div>
+        <p>Two snapshots as of today, with no dividing. Total savings held: cash and savings you could reach if you needed to, leaving out money locked away for retirement. Total debt owed: every balance outstanding, including your mortgage if you have one.</p>
+        <label class="tick"><input type="checkbox" data-step="7"> Done</label>
+      </div>
+    </li>
+
+    <li class="tabbed stepcard" data-step="8">
+      <span class="tab">Step 8</span>
+      <div class="tile">
+        <div class="th"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><h2>plug in your <em>numbers</em></h2></div>
+        <p>Add everything to the calculator below and read your monthly position. Then pick a Sunday next month to do it all again. One stocktake is a snapshot. Doing it monthly is how you see what's actually changing.</p>
+        <label class="tick"><input type="checkbox" data-step="8"> Done</label>
+      </div>
+    </li>
+  </ol>
+
+  <h2 id="calcTitle" style="margin-top:44px">your monthly <em>position</em></h2>
+  <p style="margin-top:8px">Amounts are in dollars. Use your own currency if you like, the maths is the same.</p>
+
+  <form id="calcForm" autocomplete="off" novalidate>
+
+    <div class="tabbed">
+      <span class="tab">Your window</span>
+      <fieldset class="tile">
+        <legend class="sr-only">Your window</legend>
+        <div class="field">
+          <label class="lbl" for="months">How many months of data?</label>
+          <select id="months">
+            <option value="1">1 month</option><option value="2">2 months</option>
+            <option value="3" selected>3 months</option><option value="4">4 months</option>
+            <option value="5">5 months</option><option value="6">6 months</option>
+            <option value="7">7 months</option><option value="8">8 months</option>
+            <option value="9">9 months</option><option value="10">10 months</option>
+            <option value="11">11 months</option><option value="12">12 months</option>
+          </select>
+        </div>
+        <div class="field">
+          <span class="lbl" id="l-mode">How you're entering the numbers</span>
+          <div class="seg" role="radiogroup" aria-labelledby="l-mode">
+            <label><input type="radio" name="mode" value="totals" checked><span>Window totals</span></label>
+            <label><input type="radio" name="mode" value="monthly"><span>Monthly averages</span></label>
+          </div>
+          <span class="hint">Window totals: we'll divide for you. Monthly averages: you've already divided.</span>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="tabbed">
+      <span class="tab">Money in and out</span>
+      <fieldset class="tile">
+        <legend class="sr-only">Money in and out</legend>
+        <div class="field">
+          <label class="lbl" for="income">Income after tax</label>
+          <span class="hint" id="h-income">All money in, leaving out transfers between your own accounts.</span>
+          <div class="money"><b>$</b><input type="text" id="income" inputmode="decimal" aria-describedby="h-income" placeholder="0"></div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="expenses">Spending on living costs</label>
+          <span class="hint" id="h-expenses">Everything you spent, except savings and debt payments.</span>
+          <div class="money"><b>$</b><input type="text" id="expenses" inputmode="decimal" aria-describedby="h-expenses" placeholder="0"></div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="fixed">Of that spending, the fixed bills (optional)</label>
+          <span class="hint" id="h-fixed">Rent, power, insurance, childcare, phone: the costs that are the same every month.</span>
+          <div class="money"><b>$</b><input type="text" id="fixed" inputmode="decimal" aria-describedby="h-fixed" placeholder="0"></div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="debt">Debt payments</label>
+          <span class="hint" id="h-debt">Cards, loans, buy now pay later, student loan and mortgage payments.</span>
+          <div class="money"><b>$</b><input type="text" id="debt" inputmode="decimal" aria-describedby="h-debt" placeholder="0"></div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="saved">Moved into savings or investments</label>
+          <span class="hint" id="h-saved">Money you set aside, not money already sitting in savings.</span>
+          <div class="money"><b>$</b><input type="text" id="saved" inputmode="decimal" aria-describedby="h-saved" placeholder="0"></div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="tabbed">
+      <span class="tab">Balances today</span>
+      <fieldset class="tile">
+        <legend class="sr-only">Balances today</legend>
+        <div class="field">
+          <label class="lbl" for="savingsHeld">Total savings held</label>
+          <span class="hint" id="h-sh">Savings you could reach if you needed them.</span>
+          <div class="money"><b>$</b><input type="text" id="savingsHeld" inputmode="decimal" aria-describedby="h-sh" placeholder="0"></div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="debtOwed">Total debt owed</label>
+          <span class="hint" id="h-do">Every balance outstanding, including your mortgage if you have one.</span>
+          <div class="money"><b>$</b><input type="text" id="debtOwed" inputmode="decimal" aria-describedby="h-do" placeholder="0"></div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="tabbed">
+      <span class="tab">Optional</span>
+      <fieldset class="tile">
+        <legend class="sr-only">Yearly costs</legend>
+        <div class="field" style="margin-bottom:0">
+          <label class="lbl" for="annual">Yearly costs not in this window</label>
+          <span class="hint" id="h-an">Insurance, registration, rates, gifts. Enter the total for the year and we'll spread it across 12 months.</span>
+          <div class="money"><b>$</b><input type="text" id="annual" inputmode="decimal" aria-describedby="h-an" placeholder="0"></div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+
+  <p id="live" class="sr-only" role="status"></p>
+  <div id="result" style="margin-top:28px"></div>
+  <noscript><section class="tile" style="margin-top:28px"><p style="margin:0"><b>This calculator needs scripts to run.</b> It looks like this page was opened in a file preview, which switches them off. Open the link in Safari or Chrome instead, and the results will appear here.</p></section></noscript>
+
+  <section class="actions" aria-label="Actions">
+    <button type="button" class="btn danger" id="clearBtn"><svg class="ic sm" aria-hidden="true"><use href="#i-bin"/></svg>Clear everything</button>
+    <div class="confirm" id="confirm" hidden>
+      <p class="small" style="margin:0">This clears every number and tick on this page from your phone. It can't be undone.</p>
+      <div class="row">
+        <button type="button" class="btn danger" id="clearYes">Yes, clear everything</button>
+        <button type="button" class="btn" id="clearNo">Keep my numbers</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">From stocktake sundays, @thestocktakesundays on Instagram. This is a general guide based on the numbers you enter, and it isn't financial advice. We're sharing what we do, not telling you what to do. x</p>
+</main>
+<script>
+var KEY = 'ss-baseline-v2', TKEY = 'ss-theme';
+var WAITLIST_URL = '';   /* paste the waitlist link here when it exists */
+var FIELDS = ['income','expenses','fixed','debt','saved','savingsHeld','debtOwed','annual'];
+var EXAMPLE = {mode:'totals',months:3,income:9600,expenses:6300,fixed:3800,debt:900,saved:600,savingsHeld:4200,debtOwed:18000,annual:2400};
+var nf = new Intl.NumberFormat('en-NZ',{style:'currency',currency:'NZD',maximumFractionDigits:0});
+var openInfo = {};
+
+var INFO = {
+  pos:['Your monthly position','Income after tax, minus spending on living, minus debt payments, all as monthly averages. Savings you move aside are shown separately, because they are your choice rather than a cost.'],
+  fixed:['Left after fixed costs','Income minus your fixed bills and debt payments. It is what you have for groceries, fuel, eating out, fun and anything irregular.'],
+  cover:['Months of cover','Your savings divided by what you spend and pay toward debt in a month. It is how long your savings could keep your household going with no income.']
+};
+
+function num(v){
+  var s = String(v == null ? '' : v).replace(/[^0-9.]/g,'');
+  var n = parseFloat(s);
+  return (isFinite(n) && n > 0) ? n : 0;
+}
+function money(n){ return nf.format(Math.round(Math.abs(n))); }
+function signed(n){ return (Math.round(n) < 0 ? '−' : '') + money(n); }
+function pct(x){ return Math.round(x * 100) + '%'; }
+function monthsText(x){
+  var v = x >= 10 ? Math.round(x) : Math.round(x * 10) / 10;
+  return v + (v === 1 ? ' month' : ' months');
+}
+function el(id){ return document.getElementById(id); }
+function icon(name, cls){ return '<svg class="ic' + (cls ? ' ' + cls : '') + '" aria-hidden="true"><use href="#i-' + name + '"/></svg>'; }
+function ib(group, key){
+  var open = openInfo[group] === key;
+  return '<button type="button" class="ib" data-g="' + group + '" data-k="' + key + '" aria-expanded="' + open + '" aria-controls="ex-' + group + '" aria-label="What does ' + INFO[key][0] + ' mean?">' + icon('info','sm') + '</button>';
+}
+function panel(group){
+  var k = openInfo[group];
+  return '<div class="expl" id="ex-' + group + '" role="region" aria-live="polite"' + (k ? '' : ' hidden') + '>' + (k ? '<b>' + INFO[k][0] + '</b>' + INFO[k][1] : '') + '</div>';
+}
+function stat(group, key, value, caption){
+  return '<div class="stat">' + (key ? ib(group, key) : '') + '<p class="sc"' + (key ? '' : ' style="padding-right:0"') + '>' + caption + '</p><p class="sv">' + value + '</p></div>';
+}
+
+function compute(o){
+  var m = o.mode === 'monthly' ? 1 : Math.max(1, o.months || 1);
+  var inc = o.income / m;
+  var exp = o.expenses / m + o.annual / 12;
+  var debt = o.debt / m;
+  var sav = o.saved / m;
+  var out = exp + debt;
+  var pos = inc - out;
+  var r = {
+    m:m, inc:inc, exp:exp, debt:debt, sav:sav, out:out, pos:pos, after:pos - sav,
+    weekPos:pos * 12 / 52, yearPos:pos * 12,
+    expShare: inc > 0 ? exp / inc : null,
+    debtShare: inc > 0 ? debt / inc : null,
+    saveRate: inc > 0 ? sav / inc : null,
+    cover: out > 0 ? o.savingsHeld / out : null,
+    runway: pos < 0 ? o.savingsHeld / (-pos) : null,
+    net: o.savingsHeld - o.debtOwed
+  };
+  if (o.fixed > 0) {
+    r.fixedM = Math.min(exp, o.fixed / m + o.annual / 12);
+    r.flexM = exp - r.fixedM;
+    r.afterFixed = inc - r.fixedM - debt;
+    r.fixedShare = inc > 0 ? r.fixedM / inc : null;
+  }
+  var target = out * 3;
+  r.topUp = Math.max(0, target - o.savingsHeld);
+  r.topUpMonths = (r.topUp > 0 && r.after > 0) ? r.topUp / r.after : null;
+  return r;
+}
+
+function readInputs(){
+  var c = document.querySelector('input[name="mode"]:checked');
+  var o = {mode:c ? c.value : 'totals', months:parseInt(el('months').value,10) || 1};
+  FIELDS.forEach(function(f){ o[f] = num(el(f).value); });
+  return o;
+}
+
+function verdict(r){
+  var tol = r.inc > 0 ? r.inc * 0.01 : 0;
+  if (r.inc > 0 && Math.abs(r.pos) <= tol) return {cls:'review', label:'About break-even', sub:'difference each month. Your income and outgoings are roughly level.'};
+  if (r.pos > 0) return {cls:'ok', label:'Surplus', sub:'left each month after spending and debt payments'};
+  return {cls:'over', label:'Shortfall', sub:'short each month after spending and debt payments'};
+}
+
+/* first Sunday of next month */
+function nextStocktake(){
+  var d = new Date(), y = d.getFullYear(), m = d.getMonth() + 1;
+  var f = new Date(y, m, 1);
+  var add = (7 - f.getDay()) % 7;
+  var s = new Date(y, m, 1 + add);
+  return s.toLocaleDateString('en-NZ', {weekday:'long', day:'numeric', month:'long'});
+}
+
+function summaryText(o, r){
+  var v = verdict(r);
+  var lines = [
+    'My Stocktake Sundays baseline (' + (o.mode === 'monthly' ? 'monthly averages' : r.m + (r.m === 1 ? ' month' : ' months') + ' of data') + ')',
+    'Monthly income: ' + money(r.inc),
+    'Monthly spending: ' + money(r.exp) + (r.fixedM !== undefined ? ' (fixed ' + money(r.fixedM) + ')' : ''),
+    'Monthly debt payments: ' + money(r.debt),
+    'Moved to savings each month: ' + money(r.sav),
+    'Monthly position: ' + v.label + ' of ' + money(r.pos),
+    'Savings held: ' + money(o.savingsHeld) + '  |  Debt owed: ' + money(o.debtOwed)
+  ];
+  if (r.cover !== null && o.savingsHeld > 0) lines.push('Savings cover about ' + monthsText(r.cover) + ' of spending and debt payments');
+  lines.push('Next stocktake: ' + nextStocktake());
+  return lines.join('\n');
+}
+
+function resultHTML(o, r, real){
+  var v = verdict(r), h = '';
+
+  /* hero */
+  h += '<section class="tile raised" aria-labelledby="t-pos">';
+  h += '<div class="th">' + icon('jar') + '<h2 id="t-pos">your monthly <em>position</em></h2>' + ib('hero','pos') + '</div>';
+  if (!real) h += '<p style="margin:0 0 10px"><span class="chip suggest">Example numbers</span></p><p class="caption">Add your income and spending above to see your own position.</p>';
+  h += '<h3 class="vh"><span class="chip ' + v.cls + '">' + v.label + '</span></h3>';
+  h += '<p class="figure">' + money(r.pos) + '</p>';
+  h += '<p class="caption" style="margin:0">' + v.sub + '</p>';
+  h += '<div class="stats">';
+  h += stat('', '', money(r.inc), 'Monthly income');
+  h += stat('', '', money(r.exp), 'Monthly spending');
+  h += stat('', '', money(r.debt), 'Monthly debt payments');
+  h += stat('', '', money(r.sav), 'Moved to savings each month');
+  h += stat('', '', signed(r.weekPos), r.pos < 0 ? 'Short per week' : 'Left per week');
+  h += stat('', '', signed(r.yearPos), r.pos < 0 ? 'Short per year' : 'Left per year');
+  if (r.afterFixed !== undefined) {
+    h += '<div class="stat wide">' + ib('hero','fixed') + '<p class="sc">Left to live on after fixed bills and debt</p><p class="sv">' + signed(r.afterFixed) + ' a month · ' + pct(r.fixedShare) + ' of income is fixed</p></div>';
+  }
+  h += '</div>' + panel('hero') + '</section>';
+
+  /* where it goes */
+  if (r.inc > 0) {
+    var parts = [];
+    if (r.fixedM !== undefined) { parts.push(['Fixed bills', r.fixedM]); parts.push(['Everyday and other spending', r.flexM]); }
+    else parts.push(['Spending on living', r.exp]);
+    parts.push(['Debt payments', r.debt]); parts.push(['Moved to savings', r.sav]);
+    if (r.after > 0) parts.push(['Left over after savings', r.after]);
+    parts = parts.filter(function(p){ return p[1] > 0.5; }).sort(function(a,b){ return b[1] - a[1]; });
+    h += '<section class="tile" aria-labelledby="t-goes"><div class="th">' + icon('budget') + '<h2 id="t-goes">where your income <em>goes</em></h2></div>';
+    h += '<ul class="list">' + parts.map(function(p){
+      var share = p[1] / r.inc;
+      return '<li><div class="brow"><span>' + p[0] + '</span><b>' + money(p[1]) + '</b></div>' +
+        '<div class="bar" role="img" aria-label="' + pct(share) + ' of income"><span style="width:' + Math.min(100, Math.round(share * 100)) + '%"></span></div>' +
+        '<span class="caption">' + pct(share) + ' of income</span></li>';
+    }).join('') + '</ul></section>';
+  }
+
+  /* safety net */
+  if (o.savingsHeld > 0 && r.out > 0) {
+    h += '<section class="tile" aria-labelledby="t-net"><div class="th">' + icon('sprout') + '<h2 id="t-net">your safety <em>net</em></h2>' + ib('net','cover') + '</div>';
+    h += '<p class="figure" style="font-size:40px;line-height:44px">' + monthsText(r.cover) + '</p>';
+    h += '<p class="caption" style="margin:0">of spending and debt payments covered by your savings</p>';
+    h += '<ul class="notes" style="margin-top:14px">';
+    if (r.pos < 0) h += '<li>At today\'s shortfall, your savings would cover the gap for about ' + monthsText(r.runway) + '.</li>';
+    if (r.topUp > 0) {
+      h += '<li>A common rule of thumb is 3 to 6 months. To reach 3 months you\'d need another ' + money(r.topUp) + '.' + (r.topUpMonths ? ' Setting aside ' + money(r.after) + ' a month would take about ' + monthsText(r.topUpMonths) + '.' : '') + '</li>';
+    } else h += '<li>You\'re past the 3 month rule of thumb. Whether you want 3, 6 or more depends on how steady your income is.</li>';
+    h += '</ul>' + panel('net') + '</section>';
+  }
+
+  /* worth knowing */
+  var n = [];
+  if (r.sav > 0) {
+    if (r.after >= 0) n.push('After the ' + money(r.sav) + ' you set aside each month, you have ' + money(r.after) + ' left.');
+    else n.push('You set aside ' + money(r.sav) + ' each month, but ' + (r.pos > 0 ? 'only ' + money(r.pos) : 'nothing') + ' was left after spending and debt. Something else covered the difference, such as a card, other savings, or income missing from your numbers. It\'s worth rechecking your totals.');
+  }
+  if (r.inc > 0) n.push('Spending takes ' + pct(r.expShare) + ' of your income, debt payments take ' + pct(r.debtShare) + ', and you save ' + pct(r.saveRate) + '.');
+  if (o.savingsHeld > 0 || o.debtOwed > 0) n.push('Savings minus debt: ' + signed(r.net) + '. This includes your mortgage if you entered it as debt.');
+  if (r.pos >= 0 && r.expShare !== null && r.expShare >= 0.8) n.push('Spending is a large share of your income, which leaves little room for surprises.');
+  if (r.debtShare !== null && r.debtShare >= 0.25) n.push('Debt payments are a big share of your income, so they\'re worth a closer look.');
+  if (r.fixedShare !== undefined && r.fixedShare >= 0.6) n.push('Fixed bills take ' + pct(r.fixedShare) + ' of your income. When most of it is locked in, there\'s less room to adjust month to month.');
+  if (real && o.mode === 'totals' && o.months < 12) n.push('This is based on ' + (o.months === 1 ? '1 month' : o.months + ' months') + '. Twelve months gives the most reliable picture, and yearly bills can skew a short window.');
+  if (n.length) {
+    h += '<section class="tile" aria-labelledby="t-know"><div class="th">' + icon('info') + '<h2 id="t-know">worth <em>knowing</em></h2></div>';
+    h += '<ul class="notes">' + n.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul></section>';
+  }
+
+  /* what a baseline can't show */
+  var q1 = r.pos < 0 ? 'Which categories could close your ' + money(r.pos) + ' monthly shortfall?' : (r.pos > 0 ? 'Where could your ' + money(r.pos) + ' a month work harder?' : 'Which categories are keeping you level, and which could give?');
+  h += '<section class="tile" aria-labelledby="t-next"><div class="th">' + icon('todo') + '<h2 id="t-next">what a baseline can\'t <em>show</em></h2></div>';
+  h += '<p>A baseline is a photo. It tells you where you stand, but not why. To answer these you need your transactions sorted by category, month after month:</p>';
+  h += '<ul class="lock">';
+  [q1, 'Was last month an outlier, or the new normal?', 'Are we getting closer to where we want to be?', 'What would a month look like if we changed one thing?'].forEach(function(q){
+    h += '<li>' + icon('flower','sm') + '<span>' + q + '</span></li>';
+  });
+  h += '</ul>';
+  h += '<p style="margin-top:14px">That\'s what we\'re building the Stocktake Sundays budget app to do. It brings your transactions in, sorts them by category, and gives you and your partner a monthly money date report to review together. It isn\'t open yet.</p>';
+  h += '<div class="wait">';
+  if (WAITLIST_URL) h += '<a class="btn primary" href="' + WAITLIST_URL + '" style="text-decoration:none">Join the waitlist</a>';
+  else h += '<p class="caption" style="margin:0">Follow @thestocktakesundays to hear first when the app opens.</p>';
+  h += '</div></section>';
+
+  /* next stocktake */
+  h += '<section class="tile" aria-labelledby="t-date"><div class="th">' + icon('cal') + '<h2 id="t-date">your next <em>stocktake</em></h2></div>';
+  h += '<p class="figure" style="font-size:32px;line-height:38px">' + nextStocktake() + '</p>';
+  h += '<p class="caption" style="margin:4px 0 0">The first Sunday of next month. Pop it in your calendar and do this again with your new totals, then compare. That\'s a stocktake.</p>';
+  if (real) {
+    h += '<div class="actions"><button type="button" class="btn primary" id="copyBtn">Copy my summary</button></div>';
+    h += '<textarea id="copyBox" class="copybox" readonly hidden aria-label="Summary to copy"></textarea>';
+  }
+  h += '</section>';
+  return h;
+}
+
+var lastSummary = '';
+function render(){
+  var raw = readInputs();
+  var real = raw.income > 0 && raw.expenses > 0;
+  var o = real ? raw : EXAMPLE;
+  var r = compute(o);
+  el('result').innerHTML = resultHTML(o, r, real);
+  var v = verdict(r);
+  el('live').textContent = real ? (v.label + ' of ' + money(r.pos) + ' a month') : '';
+  lastSummary = real ? summaryText(o, r) : '';
+  var cb = el('copyBtn');
+  if (cb) cb.addEventListener('click', copySummary);
+  el('months').disabled = (raw.mode === 'monthly');
+  FIELDS.forEach(function(f){
+    var on = num(el(f).value) > 0, i = el(f);
+    i.classList.toggle('changed', on);
+    i.parentNode.classList.toggle('changed', on);
+  });
+}
+
+function copySummary(){
+  var box = el('copyBox');
+  box.value = lastSummary;
+  function fallback(){
+    box.hidden = false; box.focus(); box.select();
+    try { document.execCommand('copy'); } catch(e) {}
+  }
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(lastSummary).then(function(){
+        el('copyBtn').textContent = 'Copied';
+        setTimeout(function(){ var b = el('copyBtn'); if (b) b.textContent = 'Copy my summary'; }, 1800);
+      }, fallback);
+    } else fallback();
+  } catch(e) { fallback(); }
+}
+
+el('result').addEventListener('click', function(e){
+  var b = e.target.closest('.ib');
+  if (!b) return;
+  var g = b.getAttribute('data-g'), k = b.getAttribute('data-k');
+  openInfo[g] = (openInfo[g] === k) ? null : k;
+  render();
+  var again = document.querySelector('.ib[data-g="' + g + '"][data-k="' + k + '"]');
+  if (again) again.focus();
+});
+
+/* steps */
+function updateProgress(){
+  var boxes = document.querySelectorAll('.tick input');
+  var done = 0;
+  boxes.forEach(function(b){
+    var li = b.closest('.stepcard');
+    if (b.checked) { done++; li.classList.add('done'); } else li.classList.remove('done');
+  });
+  el('progText').textContent = done + ' of ' + boxes.length + ' steps ticked';
+  el('progBar').style.width = (done / boxes.length * 100) + '%';
+}
+
+/* saving (this device only) */
+function save(){
+  try {
+    var data = {mode:readInputs().mode, months:el('months').value, vals:{}, ticks:[]};
+    FIELDS.forEach(function(f){ data.vals[f] = el(f).value; });
+    document.querySelectorAll('.tick input').forEach(function(b){ if (b.checked) data.ticks.push(b.getAttribute('data-step')); });
+    localStorage.setItem(KEY, JSON.stringify(data));
+  } catch(e) {}
+}
+function setMode(m){ var r = document.querySelector('input[name="mode"][value="' + m + '"]'); if (r) r.checked = true; }
+function restore(){
+  try {
+    var s = localStorage.getItem(KEY);
+    if (!s) return;
+    var d = JSON.parse(s);
+    if (d.mode) setMode(d.mode);
+    if (d.months) el('months').value = d.months;
+    FIELDS.forEach(function(f){ if (d.vals && d.vals[f]) el(f).value = d.vals[f]; });
+    document.querySelectorAll('.tick input').forEach(function(b){
+      b.checked = (d.ticks || []).indexOf(b.getAttribute('data-step')) > -1;
+    });
+  } catch(e) {}
+}
+function clearAll(){
+  FIELDS.forEach(function(f){ el(f).value = ''; });
+  el('months').value = '3';
+  setMode('totals');
+  document.querySelectorAll('.tick input').forEach(function(b){ b.checked = false; });
+  try { localStorage.removeItem(KEY); } catch(e) {}
+  updateProgress(); render();
+}
+
+/* theme: Burgundy Emboss is the default */
+function applyTheme(t){
+  var root = document.documentElement;
+  if (t === 'light') root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
+  el('themeSwitch').checked = (t === 'light');
+}
+el('themeSwitch').addEventListener('change', function(){
+  var t = this.checked ? 'light' : 'dark';
+  applyTheme(t);
+  try { localStorage.setItem(TKEY, t); } catch(e) {}
+});
+
+FIELDS.forEach(function(f){
+  var i = el(f);
+  i.addEventListener('input', function(){ render(); save(); });
+  i.addEventListener('blur', function(){
+    var n = num(i.value);
+    i.value = n ? n.toLocaleString('en-NZ',{maximumFractionDigits:2}) : '';
+    render(); save();
+  });
+});
+el('months').addEventListener('change', function(){ render(); save(); });
+document.querySelectorAll('input[name="mode"]').forEach(function(r){ r.addEventListener('change', function(){ render(); save(); }); });
+document.querySelectorAll('.tick input').forEach(function(b){ b.addEventListener('change', function(){ updateProgress(); save(); }); });
+el('clearBtn').addEventListener('click', function(){ el('confirm').hidden = false; el('clearBtn').hidden = true; el('clearYes').focus(); });
+el('clearNo').addEventListener('click', function(){ el('confirm').hidden = true; el('clearBtn').hidden = false; el('clearBtn').focus(); });
+el('clearYes').addEventListener('click', function(){ clearAll(); el('confirm').hidden = true; el('clearBtn').hidden = false; el('clearBtn').focus(); });
+el('calcForm').addEventListener('submit', function(e){ e.preventDefault(); });
+
+try { applyTheme(localStorage.getItem(TKEY) === 'light' ? 'light' : 'dark'); } catch(e) { applyTheme('dark'); }
+restore(); updateProgress(); render();
+</script>
